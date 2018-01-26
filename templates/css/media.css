@@ -1,0 +1,18 @@
+@media screen and (min-width: 768px) {
+    .form_element {
+        margin: 0;
+    }
+    .form_group {
+        margin: 15px auto;
+    }
+    .form_group.flex {
+        flex-direction: row;
+    }
+    .halfwidth {
+        width: 200px;
+        display: inline-block;
+    }
+    .halfwidth:first-child {
+        margin-right: 16px;
+    }
+}
