@@ -18,29 +18,29 @@
 
 
 <body>
-  <div id="topmenu" class="container flex">
-      <div class="toggle_search item">
-          <div class="flex">
-              <div class="toggle_icon item">
-                  <img src="{% static 'img/toggle-icon.png' %}" alt="Toggle Menu Icon" class="icon" />
-              </div>
-              <div class="search_input item">
-                  <input type="text" placeholder="Search" style="display: none;" />
-              </div>
-              <div class="search_icon item">
-                  <img src="{% static 'img/search-icon.png' %}" alt="Search Icon" class="icon" />
-              </div>
-          </div>
-      </div>
-      <div class="logo item">
-          <a href="index.html">
-              <img src="{% static 'img/logo.png' %}" alt="Nibble Bee Logo" />
-          </a>
-      </div>
-      <div class="profile item">
-          <a href="signin.html">SIGN IN</a>
-      </div>
-  </div>
+    <div id="topmenu" class="container flex">
+        <div class="toggle_search item">
+            <div class="flex">
+                <div class="toggle_icon item">
+                    <img src="{% static 'img/toggle-icon.png' %}" alt="Toggle Menu Icon" class="icon" />
+                </div>
+                <div class="search_input item hide">
+                    <input type="text" placeholder="Search" />
+                </div>
+                <div class="search_icon item">
+                    <img src="{% static 'img/search-icon.png' %}" alt="Search Icon" class="icon" />
+                </div>
+            </div>
+        </div>
+        <div class="logo item">
+            <a href="index.html">
+                <img src="{% static 'img/logo.png' %}" alt="Nibble Bee Logo" />
+            </a>
+        </div>
+        <div class="profile item">
+            <a href="signin.html">SIGN IN</a>
+        </div>
+    </div>
     <div id="toggle_menu" class="container">
         <div class="menu_links">
             <div class="link_group">
@@ -160,7 +160,7 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>
