@@ -1,22 +1,38 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
+from django.shortcuts import render, redirect, render_to_response
+from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate as auth_authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.contrib.auth import views as auth_views
 
 from .forms import SignUpForm, LoginForm
+from .backends import CustomAuthenticationBackend as user_auth
 
 def signup(request):
     auth_logout(request)
+    # if 'su_agree' not in request.POST:
+    #     form = SignUpForm()
+    #     form.add_error('accept terms and condi')
+    #     return render(request, 'signup.html', {'form': form})
     if request.method == 'POST':
-        request.POST = request.POST.copy()
-        request.POST.__setitem__('username', request.POST['email'])
-        form = SignUpForm(request.POST)
+        # request.POST = request.POST.copy()
+        # request.POST.__setitem__('username', request.POST['email'])
+        signup_request = {
+            # 'csrfmiddlewaretoken': request.POST['csrfmiddlewaretoken'],
+            'username': request.POST['su_email'],
+            'first_name': request.POST['su_firstname'],
+            'last_name': request.POST['su_lastname'],
+            'email': request.POST['su_email'],
+            'password1': request.POST['su_password'],
+            'password2': request.POST['su_cpassword']
+        }
+        if 'su_agree' in request.POST:
+            signup_request['agree'] = request.POST['su_agree'] 
+        form = SignUpForm(signup_request)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            user = user_auth().authenticate(username=username, password=raw_password)
             if user is not None:
                 auth_login(user=user, request=request)
                 return redirect('/')
@@ -27,19 +43,24 @@ def signup(request):
 def login(request):
     auth_logout(request)
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        login_request = {
+            # 'csrfmiddlewaretoken': request.POST['csrfmiddlewaretoken'],
+            'username': request.POST['si_username'],
+            'password': request.POST['si_password'],
+        }
+        form = LoginForm(login_request)
         if form.is_valid() or True:
-            email = request.POST['email']
-            raw_password = request.POST['password']
-            user = authenticate(username=email, password=raw_password)
+            email_or_username = login_request['username']
+            raw_password = login_request['password']
+            user = user_auth().authenticate(username=email_or_username, password=raw_password)
             if user is not None:
                 auth_login(user=user, request=request)
                 return redirect('/')
     else:
         form = LoginForm()
-    return render(request, 'users/registration/login.html', {'form': form})
+    return render(request, 'signin.html', {'form': form})
 
 
 def logout(request):
     auth_logout(request)
-    return render(request, 'users/registration/logout.html')
+    return render(request, 'logout.html')
