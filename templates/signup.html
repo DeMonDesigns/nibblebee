@@ -89,6 +89,7 @@
     <div id="signupform" class="container flex">
         <div class="form_container">
             <form id="signup" method="post">
+              {% csrf_token %}
                 <div class="form_group">
                     <div class="form_element halfwidth">
                         <input type="text" id="su_firstname" name="su_firstname" placeholder="FIRST NAME" />
