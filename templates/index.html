@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
     <meta charset="utf-8">
     <title>Nibble Bee || Home Page</title>
@@ -8,9 +8,9 @@
     <meta name="author" content="DeMon Designs">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/media.css' %}">
     <!--[if lt IE 9]>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
 <![endif]-->
@@ -18,29 +18,29 @@
 
 
 <body>
-    <div id="topmenu" class="container flex">
-        <div class="toggle_search item">
-            <div class="flex">
-                <div class="toggle_icon item">
-                    <img src="img/toggle-icon.png" alt="Toggle Menu Icon" class="icon" />
-                </div>
-                <div class="search_input item hide">
-                    <input type="text" placeholder="Search" />
-                </div>
-                <div class="search_icon item">
-                    <img src="img/search-icon.png" alt="Search Icon" class="icon" />
-                </div>
-            </div>
-        </div>
-        <div class="logo item">
-            <a href="index.html">
-                <img src="img/logo.png" alt="Nibble Bee Logo" />
-            </a>
-        </div>
-        <div class="profile item">
-            <a href="signin.html">SIGN IN</a>
-        </div>
-    </div>
+  <div id="topmenu" class="container flex">
+      <div class="toggle_search item">
+          <div class="flex">
+              <div class="toggle_icon item">
+                  <img src="{% static 'img/toggle-icon.png' %}" alt="Toggle Menu Icon" class="icon" />
+              </div>
+              <div class="search_input item">
+                  <input type="text" placeholder="Search" style="display: none;" />
+              </div>
+              <div class="search_icon item">
+                  <img src="{% static 'img/search-icon.png' %}" alt="Search Icon" class="icon" />
+              </div>
+          </div>
+      </div>
+      <div class="logo item">
+          <a href="index.html">
+              <img src="{% static 'img/logo.png' %}" alt="Nibble Bee Logo" />
+          </a>
+      </div>
+      <div class="profile item">
+          <a href="signin.html">SIGN IN</a>
+      </div>
+  </div>
     <div id="toggle_menu" class="container">
         <div class="menu_links">
             <div class="link_group">
@@ -87,6 +87,8 @@
             </div>
         </div>
     </div>
+    <h1>{{user.username}}</h1>
+    <h2>{{user.last_name}} {{user.first_name}}</h2>
     <div id="postfeed" class="container">
         <div class="grid">
             <div class="post grid_item">
@@ -95,8 +97,8 @@
                         <img src="img/demo.jpg">
                     </div>
                     <div class="post_text">
-                        <p class="post_title">{{user.username}}</p>
-                        <p class="post_desc">{{user.first_name}} {{user.last_name}}</p>
+                        <p class="post_title">Title</p>
+                        <p class="post_desc">This is the description. We can add as many lines as we want.</p>
                     </div>
                 </div>
             </div>
