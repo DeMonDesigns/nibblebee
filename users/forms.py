@@ -18,6 +18,14 @@ class SignUpForm(UserCreationForm):
     #         raise forms.ValidationError('You have not agreed to terms and conditions.')
     #     return data
 
+    def clean_email(self):
+        email = self.clean()['email']
+        try:
+            match = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return email
+        raise forms.ValidationError('This email is already in use')
+
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'agree')
