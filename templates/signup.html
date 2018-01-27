@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
     <meta charset="utf-8">
     <title>Nibble Bee || Sign Up</title>
@@ -8,9 +8,9 @@
     <meta name="author" content="DeMon Designs">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/media.css' %}">
     <!--[if lt IE 9]>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
 <![endif]-->
@@ -21,19 +21,19 @@
         <div class="toggle_search item">
             <div class="flex">
                 <div class="toggle_icon item">
-                    <img src="img/toggle-icon.png" alt="Toggle Menu Icon" class="icon" />
+                    <img src="{% static 'img/toggle-icon.png' %}" alt="Toggle Menu Icon" class="icon" />
                 </div>
                 <div class="search_input item">
                     <input type="text" placeholder="Search" style="display: none;" />
                 </div>
                 <div class="search_icon item">
-                    <img src="img/search-icon.png" alt="Search Icon" class="icon" />
+                    <img src="{% static 'img/search-icon.png' %}" alt="Search Icon" class="icon" />
                 </div>
             </div>
         </div>
         <div class="logo item">
             <a href="index.html">
-                <img src="img/logo.png" alt="Nibble Bee Logo" />
+                <img src="{% static 'img/logo.png' %}" alt="Nibble Bee Logo" />
             </a>
         </div>
         <div class="profile item">
@@ -88,7 +88,7 @@
     </div>
     <div id="signupform" class="container flex">
         <div class="form_container">
-            <form id="signup">
+            <form id="signup" method="post">
                 <div class="form_group">
                     <div class="form_element halfwidth">
                         <input type="text" id="su_firstname" name="su_firstname" placeholder="FIRST NAME" />
@@ -124,14 +124,14 @@
                 </div>
                 <div class="form_group form_special">
                     <div class="form_element">
-                        <span>Already have an account? <a href="signin.html">Sign In</a></span>
+                        <span>Already have an account? <a href="/users/login">Sign In</a></span>
                     </div>
                 </div>
             </form>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>
