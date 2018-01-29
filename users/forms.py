@@ -54,3 +54,21 @@ class EditProfileForm(forms.ModelForm):
         f = self.fields.get('user_permissions', None)
         if f is not None:
             f.queryset = f.queryset.select_related('content_type')
+
+class EditUsernameForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ('username',)
+
+    def clean_username(self):
+        username = self.clean()['username']
+        if username == self.instance.username:
+            return username
+        if '@' in username:
+            raise forms.ValidationError('Invalid')
+        try:
+            match = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return username
+        raise forms.ValidationError('This username is already in use.')

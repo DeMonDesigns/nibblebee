@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^profile/(?P<userid>[\w.-@]*)$', views.view_profile, name='get_profile'),
     url(r'^settings/$', views.edit_profile, name='edit_profile'),
     url(r'^settings/change-password/$', views.change_password, name='change_password'),
+    url(r'^settings/change-username/$', views.change_username, name='change_username')
     # url(r'^oauth/', include('social_django.urls', namespace='social')),
 ]

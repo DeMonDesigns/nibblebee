@@ -7,7 +7,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from .forms import SignUpForm, LoginForm, EditProfileForm
+from .forms import SignUpForm, LoginForm, EditProfileForm, EditUsernameForm
 from .backends import CustomAuthenticationBackend as user_auth
 
 def signup(request):
@@ -116,3 +116,20 @@ def change_password(request):
         'user': user
     }
     return render(request, 'test-change-password.html', args)
+
+@login_required(login_url='/users/login/?next=/users/profile/')
+def change_username(request):
+    user = request.user
+    if request.method == 'POST':
+        form = EditUsernameForm(data=request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('/users/profile/')
+        else:
+            return redirect('/users/settings/change-username')
+    form = EditUsernameForm(instance=user)
+    args = {
+        'form': form,
+        'user': user
+    }
+    return render(request, 'test-change-username.html', args)
