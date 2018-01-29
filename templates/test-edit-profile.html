@@ -11,14 +11,11 @@
     Name: {{ user.first_name }} {{ user.last_name }}
     <br />
     Email: {{ user.email }}
-    <br />
-    Bio: {{ user.userprofile.bio }}
-    <br />
-    Location: {{ user.userprofile.location }}
-    <br />
-    DoB: {{ user.userprofile.dob }}
-    <br />
-    Sex: {{ user.userprofile.sex }}
   </p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
 </body>
 </html>
