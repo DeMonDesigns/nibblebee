@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate as auth_authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse
 from django.contrib.auth import views as auth_views
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -66,14 +67,12 @@ def logout(request):
 
 
 @login_required(login_url='/users/login/?next=/users/profile/')
-def view_profile(request, userid=None):
+def view_profile(request, userid=''):
     requested_user = request.user
     if len(userid) != 0:
         try:
             requested_user = User.objects.get(username=userid)
         except User.DoesNotExist:
-            requested_user = None
-        if requested_user is None:
             return render(request, 'test-404.html')
     editable = False
     if request.user == requested_user:
@@ -93,10 +92,27 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             return redirect('/users/profile/')
-    else:
-        form = EditProfileForm(instance=user.userprofile)
-        args = {
-            'user': user,
-            'form': form,
-        }
-        return render(request, 'test-edit-profile.html', args)
+    form = EditProfileForm(instance=user.userprofile)
+    args = {
+        'user': user,
+        'form': form,
+    }
+    return render(request, 'test-edit-profile.html', args)
+
+@login_required(login_url='/users/login/?next=/users/profile/')
+def change_password(request):
+    user = request.user
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/users/profile/')
+        else:
+            return redirect('/users/settings/change-password')
+    form = PasswordChangeForm(user=user)
+    args = {
+        'form': form,
+        'user': user
+    }
+    return render(request, 'test-change-password.html', args)
