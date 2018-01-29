@@ -139,7 +139,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-STATIFILE_FINDERS = [
+STATICFILE_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinders',
 ]
@@ -148,3 +148,4 @@ STATIFILE_FINDERS = [
 # Login redirect url
 
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/users/login'

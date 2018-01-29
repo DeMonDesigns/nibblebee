@@ -3,21 +3,18 @@ from django.contrib.auth import login as auth_login, logout as auth_logout, auth
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .forms import SignUpForm, LoginForm
 from .backends import CustomAuthenticationBackend as user_auth
 
 def signup(request):
     auth_logout(request)
-    # if 'su_agree' not in request.POST:
-    #     form = SignUpForm()
-    #     form.add_error('accept terms and condi')
-    #     return render(request, 'signup.html', {'form': form})
     if request.method == 'POST':
         # request.POST = request.POST.copy()
         # request.POST.__setitem__('username', request.POST['email'])
         signup_request = {
-            # 'csrfmiddlewaretoken': request.POST['csrfmiddlewaretoken'],
             'username': request.POST['su_email'],
             'first_name': request.POST['su_firstname'],
             'last_name': request.POST['su_lastname'],
@@ -44,7 +41,6 @@ def login(request):
     auth_logout(request)
     if request.method == 'POST':
         login_request = {
-            # 'csrfmiddlewaretoken': request.POST['csrfmiddlewaretoken'],
             'username': request.POST['si_username'],
             'password': request.POST['si_password'],
         }
@@ -55,6 +51,9 @@ def login(request):
             user = user_auth().authenticate(username=email_or_username, password=raw_password)
             if user is not None:
                 auth_login(user=user, request=request)
+                next_url = request.GET.get('next', None)
+                if next_url is not None:
+                    return redirect(next_url)
                 return redirect('/')
     else:
         form = LoginForm()
@@ -64,3 +63,29 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return render(request, 'logout.html')
+
+
+@login_required(login_url='/users/login/?next=/users/profile/')
+def profile(request, userid=None):
+    requested_user = request.user
+    if len(userid) != 0:
+        try:
+            requested_user = User.objects.get(username=userid)
+        except User.DoesNotExist:
+            requested_user = None
+        if requested_user is None:
+            return render(request, 'test-404.html')
+    editable = False
+    if request.user == requested_user:
+        editable = True
+    args = {
+        'user': requested_user,
+        'editable': editable,
+    }
+    return render(request, 'test-profile.html', args)
+
+
+@login_required(login_url='/users/login/?next=/users/profile/')
+def edit_profile(request):
+    user = request.user
+    return render(request, 'test-edit-profile.html', {'user': user})

@@ -6,17 +6,17 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 username_validator = UnicodeUsernameValidator()
 
 class SignUpForm(UserCreationForm):
-    username = forms.CharField(max_length=150, validators=[username_validator], required=False)
+    username = forms.CharField(max_length=150, validators=[username_validator], required=True)
     first_name = forms.CharField(max_length=50, required=True)
     last_name = forms.CharField(max_length=50, required=False)
     email = forms.EmailField(max_length=255, required=True)
     agree = forms.CharField(max_length=50, required=True, error_messages={'required': 'You have not agreed to terms and conditions.'})
 
-    # def clean_agree(self):
-    #     data = self.clean_data['agree']
-    #     if data != 'agree':
-    #         raise forms.ValidationError('You have not agreed to terms and conditions.')
-    #     return data
+    def clean_agree(self):
+        data = self.clean()['agree']
+        if data != 'agree':
+            raise forms.ValidationError('You have not agreed to terms and conditions')
+        return data
 
     def clean_email(self):
         email = self.clean()['email']
