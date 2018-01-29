@@ -34,24 +34,13 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'agree')
 
-class LoginForm(AuthenticationForm):
-    # username = forms.CharField(max_length=150, required=False)
-    email = forms.CharField(max_length=255, required=True)
+class LoginForm(forms.ModelForm):
+    userid = forms.CharField(max_length=255, required=True)
     password = forms.CharField(max_length=30, required=True, widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ('email', 'password')
-
-# class EditProfileForm(UserChangeForm):
-#
-#     class Meta:
-#         model = UserProfile
-#         fields = ('bio', 'location', 'sex', 'dob')
-#         exclude = ('password',)
-#
-#     def clean_password(self):
-#         return '' #self.initial['password']
+        fields = ('userid', 'password')
 
 
 class EditProfileForm(forms.ModelForm):

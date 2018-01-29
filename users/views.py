@@ -41,12 +41,12 @@ def login(request):
     auth_logout(request)
     if request.method == 'POST':
         login_request = {
-            'username': request.POST['si_username'],
+            'userid': request.POST['si_username'],
             'password': request.POST['si_password'],
         }
         form = LoginForm(login_request)
-        if form.is_valid() or True:
-            userid = login_request['username']
+        if form.is_valid():
+            userid = login_request['userid']
             raw_password = login_request['password']
             user = user_auth().authenticate(username=userid, password=raw_password)
             if user is not None:
