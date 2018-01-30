@@ -26,7 +26,7 @@ def signup(request):
             'password2': request.POST['su_cpassword']
         }
         if 'su_agree' in request.POST:
-            signup_request['agree'] = request.POST['su_agree'] 
+            signup_request['agree'] = request.POST['su_agree']
         form = SignUpForm(signup_request)
         if form.is_valid():
             form.save()

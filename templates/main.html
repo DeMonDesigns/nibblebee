@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>Nibble Bee || Home Page</title>
+    <meta name="description" content="Nibble Bee">
+    <meta name="author" content="DeMon Designs">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/media.css' %}">
+    <!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+<![endif]-->
+</head>
+
+
+<body>
+    <div id="topmenu" class="container flex">
+        <div class="toggle_search item">
+            <div class="flex">
+                <div class="toggle_icon item">
+                    <img src="{% static 'img/toggle-icon.png' %}" alt="Toggle Menu Icon" class="icon" />
+                </div>
+                <div class="search_input item hide">
+                    <input type="text" placeholder="Search" />
+                </div>
+                <div class="search_icon item">
+                    <img src="{% static 'img/search-icon.png' %}" alt="Search Icon" class="icon" />
+                </div>
+            </div>
+        </div>
+        <div class="logo item">
+            <a href="index.html">
+                <img src="{% static 'img/logo.png' %}" alt="Nibble Bee Logo" />
+            </a>
+        </div>
+        <div class="profile item">
+            {% if user.is_authenticated %}
+                <div class="flex">
+                    <div class="noti_icon item">
+                        <img src="{% static 'img/noti-no.png' %}" alt="Toggle Menu Icon" class="icon" />
+                    </div>
+                    <div class="prof_img item">
+                        <img src="{% static 'img/default_pic.jpg' %}" alt="Toggle Menu Icon" />
+                    </div>
+                </div>
+            {% else %}
+                <a href="users/login">SIGN IN</a>
+            {% endif %}
+        </div>
+    </div>
+    <div id="toggle_menu" class="container">
+        <div class="menu_links">
+            <div class="link_group">
+                <a href="index.html" class="selected">
+                    <div class="link_container">
+                        <span class="link_text">Home</span>
+                    </div>
+                </a>
+                <a href="signin.html">
+                    <div class="link_container">
+                        <span class="link_text">Sign In</span>
+                    </div>
+                </a>
+                <a href="signup.html">
+                    <div class="link_container">
+                        <span class="link_text">Sign Up</span>
+                    </div>
+                </a>
+            </div>
+            <div class="link_group link_special">
+                <div class="link_head">
+                    <span>Categories</span>
+                </div>
+                <a href="index.html">
+                    <div class="link_container">
+                        <span class="link_text">Fun</span>
+                    </div>
+                </a>
+                <a href="index.html">
+                    <div class="link_container">
+                        <span class="link_text">Entertainment</span>
+                    </div>
+                </a>
+                <a href="index.html">
+                    <div class="link_container">
+                        <span class="link_text">Games</span>
+                    </div>
+                </a>
+                <a href="index.html">
+                    <div class="link_container">
+                        <span class="link_text">Crypto</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
