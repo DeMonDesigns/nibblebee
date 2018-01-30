@@ -1,9 +1,15 @@
-<!doctype html>
-<html>
-<head>
-  <title>Logged out</title>
-</head>
-<body>
-  <h2>You have been successfuly logged out</h2>
-</body>
-</html>
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block pagename %}
+    Log Out
+{% endblock %}
+
+{% block content %}
+    <div id="logout" class="container centertext">
+        <img src="{% static 'img/nibble-bee1.png' %}" />
+        <h3>You have been successfuly logged out</h3>
+        <p>Go back to <a href="{% url 'home' %}">Home Page</a></p>
+    </div>
+{% endblock %}

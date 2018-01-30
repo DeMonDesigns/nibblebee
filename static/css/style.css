@@ -35,6 +35,10 @@ a {
     line-height: 0;
 }
 
+.centertext {
+    text-align: center;
+}
+
 a:hover, a:active {
     color: #5886d8;
 }
@@ -115,40 +119,60 @@ a:hover, a:active {
     cursor: pointer;
 }
 
-#toggle_menu {
-    max-width: 350px;
+#toggle_menu, #toggle_profile {
     width: 100%;
     background: #454257;
-    height: 100vh;
     position: fixed;
-    z-index: 9;
     top: 0;
-    left: 0;
-    transform: translateX(-351px);
+    font-size: 1.1em;
     transition: all 0.3s ease-out;
+}
+
+#toggle_menu {
+    max-width: 350px;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-351px);
+    z-index: 10;
+}
+
+#toggle_profile {
+    max-width: 180px;
+    right: 0;
+    display: none;
+    z-index: 9;
 }
 
 #toggle_menu.toggle_open {
     transform: translateX(0);
 }
 
-.menu_links {
+#toggle_profile.toggle_open {
+    display: block;
+}
+
+.menu_links, .profile_links {
     margin-top: 46.5px;
 }
 
 .link_container {
-    padding: 10px;
+    padding: 15px;
     transition: all 0.1s ease-in-out;
 }
 
-#toggle_menu a {
+#toggle_menu a, #toggle_profile a {
     color: #eaeaea;
     font-weight: 500;
 }
 
-#toggle_menu a:hover .link_container, #toggle_menu a.selected .link_container {
+#toggle_menu a:hover .link_container, #toggle_menu a.selected .link_container, #toggle_profile a:hover .link_container {
     color: #1ababa;
     background: #eaeaea;
+}
+
+#toggle_profile .link_container.selected {
+    color: #fff;
+    background: #1ababa;
 }
 
 #toggle_menu .link_special a {
@@ -177,7 +201,6 @@ a:hover, a:active {
 
 #postfeed>.grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    text-align: center;
     grid-gap: 15px;
 }
 
@@ -253,7 +276,6 @@ img {
 .form_element {
     width: 100%;
     margin: 12px auto;
-    text-align: center;
 }
 
 .form_special {

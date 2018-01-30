@@ -3,7 +3,7 @@
 {% load static %}
 <head>
     <meta charset="utf-8">
-    <title>Nibble Bee || Home Page</title>
+    <title>Nibble Bee || {% block pagename %}{% endblock %}</title>
     <meta name="description" content="Nibble Bee">
     <meta name="author" content="DeMon Designs">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="logo item">
-            <a href="index.html">
+            <a href="{% url 'home' %}">
                 <img src="{% static 'img/logo.png' %}" alt="Nibble Bee Logo" />
             </a>
         </div>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             {% else %}
-                <a href="users/login">SIGN IN</a>
+                <a href="{% url 'login' %}">SIGN IN</a>
             {% endif %}
         </div>
     </div>
@@ -98,6 +98,25 @@
             </div>
         </div>
     </div>
+    {% if user.is_authenticated %}
+        <div id="toggle_profile" class="container">
+            <div class="profile_links centertext">
+                <div class="link_container selected">
+                    <span class="link_text">Howdy! {{user.first_name}} {{user.last_name}}</span>
+                </div>
+                <a href="{% url 'view_profile' %}">
+                    <div class="link_container">
+                        <span class="link_text">Profile</span>
+                    </div>
+                </a>
+                <a href="{% url 'logout' %}">
+                    <div class="link_container">
+                        <span class="link_text">Logout</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    {% endif %}
     {% block content %}
     {% endblock %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

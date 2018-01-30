@@ -2,33 +2,37 @@
 
 {% load static %}
 
+{% block pagename %}
+    Sign In
+{% endblock %}
+
 {% block content %}
     <div id="signinform" class="container flex">
         <div class="form_container">
             <form id="signin" method="post">
               {% csrf_token %}
                 <div class="form_group">
-                    <div class="form_element">
+                    <div class="form_element centertext">
                         <input type="text" id="si_username" name="si_username" placeholder="EMAIL / USERNAME" />
                     </div>
                 </div>
                 <div class="form_group">
-                    <div class="form_element">
+                    <div class="form_element centertext">
                         <input type="password" id="si_password" name="si_password" placeholder="PASSWORD" />
                     </div>
                 </div>
                 <div class="form_group form_special">
-                    <div class="form_element">
+                    <div class="form_element centertext">
                         <button type="submit" id="si_signin" class="btn" name="si_signin">SIGN IN</button>
                     </div>
                 </div>
                 <div class="form_group form_special">
-                    <div class="form_element">
+                    <div class="form_element centertext">
                         <span><a href="signup.html">Forgot password</a></span>
                     </div>
                 </div>
                 <div class="form_group form_special">
-                    <div class="form_element">
+                    <div class="form_element centertext">
                         <span>Need an account? <a href="/users/signup">Sign Up</a></span>
                     </div>
                 </div>
