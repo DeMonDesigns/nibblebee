@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <title>Nibble bee</title>
+</head>
+<body>
+  <h2>Profile</h2>
+  <p>
+    Username: {{ user.username }}
+    <br />
+    Name: {{ user.first_name }} {{ user.last_name }}
+    <br />
+    Email: {{ user.email }}
+    <br />
+    Bio: {{ user.userprofile.bio }}
+    <br />
+    Location: {{ user.userprofile.location }}
+    <br />
+    DoB: {{ user.userprofile.dob }}
+    <br />
+    Sex: {{ user.userprofile.sex }}
+  </p>
+  {% if editable %}
+    <p>
+      <form action="/users/settings/">
+        <button type="submit">Edit</button>
+      </form>
+    </p>
+  {% endif %}
+</body>
+</html>

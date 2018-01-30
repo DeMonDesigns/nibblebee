@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <title>Nibble bee</title>
+</head>
+<body>
+  <h2>Change Username</h2>
+  user: {{user.username}}
+  <p>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save</button>
+    </form>
+  </p>
+  <p>
+    {{form.errors}}
+    {{form.username.error}}
+    {{form.username.errors}}
+  </p>
+</body>
+</html>
