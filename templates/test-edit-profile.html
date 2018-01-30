@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <title>Nibble bee</title>
+</head>
+<body>
+  <h2>Edit Profile</h2>
+  <p>
+    Username: {{ user.username }}
+    <br />
+    Name: {{ user.first_name }} {{ user.last_name }}
+    <br />
+    Email: {{ user.email }}
+  </p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+  <p>
+    <a href="/users/settings/change-password">Change Password</a>
+  </p>
+  <p>
+    <a href="/users/settings/change-username">Change username</a>
+  </p>
+</body>
+</html>
