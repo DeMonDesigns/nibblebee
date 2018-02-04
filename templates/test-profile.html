@@ -12,7 +12,7 @@
     <br />
     Email: {{ user.email }}
     <br />
-    Bio: {{ user.userprofile.bio }}
+    Bio: {{ user.userprofile.bio | safe}}
     <br />
     Location: {{ user.userprofile.location }}
     <br />

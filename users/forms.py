@@ -49,11 +49,11 @@ class EditProfileForm(forms.ModelForm):
         model = UserProfile
         exclude = ('user',)
 
-    def __init__(self, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
-        f = self.fields.get('user_permissions', None)
-        if f is not None:
-            f.queryset = f.queryset.select_related('content_type')
+    # def __init__(self, *args, **kwargs):
+    #     super(EditProfileForm, self).__init__(*args, **kwargs)
+    #     f = self.fields.get('user_permissions', None)
+    #     if f is not None:
+    #         f.queryset = f.queryset.select_related('content_type')
 
 class EditUsernameForm(forms.ModelForm):
 
