@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'articles',
     # 'social_django',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -133,7 +136,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -144,8 +147,43 @@ STATICFILE_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinders',
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 # Login redirect url
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/users/login'
+
+# ckeditor settings
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['Link', 'Unlink'],
+        ]
+    },
+    'articles': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            [
+                'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+                'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'
+            ],
+            ['Link', 'Unlink'],
+            ['Image'],
+            ['Font', 'FontSize'],
+            ['RemoveFormat', 'Source']
+        ]
+    },
+}
+
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+CKEDITOR_RESTRICT_BY_USER = True
+
+CKEDITOR_REQUIRE_STAFF = False

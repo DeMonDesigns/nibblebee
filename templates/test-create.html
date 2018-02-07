@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+  <title>Articles</title>
+  <script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
+  {{form.media}}
+</head>
+<body>
+  <h2>Articles</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
