@@ -160,7 +160,11 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'Basic',
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['Link', 'Unlink'],
+        ]
     },
     'articles': {
         'toolbar': 'Custom',
@@ -179,3 +183,7 @@ CKEDITOR_CONFIGS = {
 }
 
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+CKEDITOR_RESTRICT_BY_USER = True
+
+CKEDITOR_REQUIRE_STAFF = False

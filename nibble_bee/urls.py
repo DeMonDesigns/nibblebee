@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
+from django.views.decorators.cache import never_cache
+from ckeditor_uploader import views as ck_views
 
 from . import views
 
@@ -22,6 +26,14 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home),
     url(r'^users/', include('users.urls')),
-    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    # url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^articles/', include('articles.urls')),
+    url(r'^ckeditor/upload/', ck_views.upload, name='ckeditor_upload'),
+    url(r'^ckeditor/browse/', never_cache(ck_views.browse), name='ckeditor_browse'),
 ]
+
+# original urls
+# url(r'^upload/', staff_member_required(views.upload), name='ckeditor_upload'),
+# url(r'^browse/', never_cache(staff_member_required(views.browse)), name='ckeditor_browse'),
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
