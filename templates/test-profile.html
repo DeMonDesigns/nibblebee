@@ -1,25 +1,36 @@
-<!doctype html>
-<html>
-<head>
-  <title>Nibble bee</title>
-</head>
-<body>
-  <h2>Profile</h2>
-  <p>
-    Username: {{ user.username }}
-    <br />
-    Name: {{ user.first_name }} {{ user.last_name }}
-    <br />
-    Email: {{ user.email }}
-    <br />
-    Bio: {{ user.userprofile.bio | safe}}
-    <br />
-    Location: {{ user.userprofile.location }}
-    <br />
-    DoB: {{ user.userprofile.dob }}
-    <br />
-    Sex: {{ user.userprofile.sex }}
-  </p>
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block pagename %}
+    Profile Page
+{% endblock %}
+
+{% block content %}
+    <h2>Profile</h2>
+    <div id="profile_container" class="container centertext">
+        <div class="container_row flex">
+            <div class="row_title">Username</div><div class="row_content">{{ user.username }}</div>
+        </div>
+        <div class="container_row flex">
+            <div class="row_title">Name</div><div class="row_content">{{ user.first_name }} {{ user.last_name }}</div>
+        </div>
+        <div class="container_row flex">
+            <div class="row_title">Email</div><div class="row_content">{{ user.email }}</div>
+        </div>
+        <div class="container_row flex">
+            <div class="row_title">Bio</div><div class="row_content">{{ user.userprofile.bio | safe}}</div>
+        </div>
+        <div class="container_row flex">
+            <div class="row_title">Location</div><div class="row_content">{{ user.userprofile.location }}</div>
+        </div>
+        <div class="container_row flex">
+            <div class="row_title">DoB</div><div class="row_content">{{ user.userprofile.dob }}</div>
+        </div>
+        <div class="container_row flex">
+            <div class="row_title">Sex</div><div class="row_content">{{ user.userprofile.sex }}</div>
+        </div>
+    </div>
   {% if editable %}
     <p>
       <form action="/users/settings/">
@@ -27,5 +38,4 @@
       </form>
     </p>
   {% endif %}
-</body>
-</html>
+{% endblock %}

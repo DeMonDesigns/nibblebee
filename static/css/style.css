@@ -360,3 +360,35 @@ input[type="checkbox"] {
 .form_group.flex {
     flex-direction: column;
 }
+
+#logout {
+    padding: 40px 30px;
+    max-width: 550px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+#profile_container {
+    font-size: 1.2em;
+}
+
+#profile_container .container_row {
+    justify-content: center;
+}
+
+.container_row {
+    padding: 10px;
+}
+
+.row_title {
+    margin-right: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: right;
+    width: 50%;
+}
+
+.row_content {
+    text-align: left;
+    width: 50%;
+}

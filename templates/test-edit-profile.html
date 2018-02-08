@@ -1,11 +1,12 @@
-<!doctype html>
-<html>
-<head>
-  <title>Nibble bee</title>
-  <script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
-  {{ form.media }}
-</head>
-<body>
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block pagename %}
+    Edit Profile
+{% endblock %}
+
+{% block content %}
   <h2>Edit Profile</h2>
   <p>
     Username: {{ user.username }}
@@ -18,12 +19,11 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
-  </form>
-  <p>
+    </form>
+    <p>
     <a href="/users/settings/change-password">Change Password</a>
-  </p>
-  <p>
+    </p>
+    <p>
     <a href="/users/settings/change-username">Change username</a>
-  </p>
-</body>
-</html>
+    </p>
+{% endblock %}
