@@ -98,7 +98,8 @@ def edit_profile(request):
             if 'image' in request.FILES:
                 data = request.FILES['image']
                 ext = data.content_type.split('/')[1]
-                userprofile.image.delete(False)
+                if userprofile.image.name != 'default_pic.jpg':
+                    userprofile.image.delete(False)
                 path = default_storage.save('profile-image/'+user.username+'/'+user.username+"."+ext, ContentFile(data.read()))
                 # image_file = os.path.join(settings.MEDIA_ROOT, path)
                 userprofile.image = path

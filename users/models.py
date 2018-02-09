@@ -8,15 +8,15 @@ from ckeditor.fields import RichTextField
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # bio = models.TextField(max_length=300)
-    bio = RichTextField()
-    location = models.CharField(max_length=100)
+    bio = RichTextField(blank=True)
+    location = models.CharField(max_length=100, blank=True)
     sex_choices = [
         ('M', 'Male'),
         ('F', 'Female'),
         ('O', 'Others'),
         ('N', '')
     ]
-    sex = models.CharField(max_length=10, choices=sex_choices, default='N')
+    sex = models.CharField(max_length=10, choices=sex_choices, default='N', blank=True)
     dob = models.DateField(null=True, blank=True)
     image = models.ImageField(upload_to='profile-image', blank=True, default='default_pic.jpg')
 
