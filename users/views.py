@@ -6,6 +6,10 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+import os
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from django.conf import settings
 
 from .forms import SignUpForm, LoginForm, EditProfileForm, EditUsernameForm
 from .backends import CustomAuthenticationBackend as user_auth
@@ -90,7 +94,15 @@ def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=user.userprofile)
         if form.is_valid():
-            form.save()
+            userprofile =  form.save(commit=False)
+            if 'image' in request.FILES:
+                data = request.FILES['image']
+                ext = data.content_type.split('/')[1]
+                userprofile.image.delete(False)
+                path = default_storage.save('profile-image/'+user.username+'/'+user.username+"."+ext, ContentFile(data.read()))
+                # image_file = os.path.join(settings.MEDIA_ROOT, path)
+                userprofile.image = path
+            userprofile.save()
             return redirect('/users/profile/')
     form = EditProfileForm(instance=user.userprofile)
     args = {

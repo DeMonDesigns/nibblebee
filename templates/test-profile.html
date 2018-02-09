@@ -10,6 +10,12 @@
     <h2>Profile</h2>
     <div id="profile_container" class="container centertext">
         <div class="container_row flex">
+            <div class="row_title">Profile-image</div>
+            <div class="row_content">
+                <img src="{{ user.userprofile.image.url }}" alt="profile-image" />
+            </div>
+        </div>
+        <div class="container_row flex">
             <div class="row_title">Username</div><div class="row_content">{{ user.username }}</div>
         </div>
         <div class="container_row flex">

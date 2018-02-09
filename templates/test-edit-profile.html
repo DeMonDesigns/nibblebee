@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block content %}
+<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
+{{form.media}}
   <h2>Edit Profile</h2>
   <p>
     Username: {{ user.username }}
@@ -15,7 +17,7 @@
     <br />
     Email: {{ user.email }}
   </p>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>

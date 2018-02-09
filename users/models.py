@@ -18,6 +18,7 @@ class UserProfile(models.Model):
     ]
     sex = models.CharField(max_length=10, choices=sex_choices, default='N')
     dob = models.DateField(null=True, blank=True)
+    image = models.ImageField(upload_to='profile-image', blank=True)
 
     def __str__(self):
         return self.user.username
